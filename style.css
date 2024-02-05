@@ -1,0 +1,87 @@
+* {
+  box-sizing: border-box;
+  -moz-user-select: none;
+   -ms-user-select: none;
+       user-select: none;
+  -webkit-user-select: none;
+}
+body {
+  
+  min-height: 100vh;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+}
+@media (prefers-color-scheme: dark) {
+  body {
+    background: rgb(255, 252, 229);
+  }
+}
+.heart {
+  position: absolute;
+  height: calc(var(--size) * 1vmin);
+  width: calc(var(--size) * 1vmin);
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+.heart svg {
+  height: 100%;
+  width: 100%;
+}
+.heart path {
+  fill: hsl(var(--hue), 100%, 60%);
+}
+svg {
+  --size: 50;
+  height: calc(var(--size) * 1vmin);
+  width: calc(var(--size) * 1vmin);
+  z-index: 2;
+}
+span {
+  z-index: 2;
+}
+.care-bear {
+  --lightness: 50;
+  cursor: pointer;
+}
+.care-bear__ear circle:nth-of-type(1) {
+  fill: hsl(var(--hue), calc(var(--saturation) * 1%), calc(var(--lightness) * 1%));
+}
+.care-bear__ear circle:nth-of-type(2) {
+  --lightness: 90;
+  fill: hsl(var(--hue), calc(var(--saturation) * 1%), calc(var(--lightness) * 1%));
+}
+.care-bear__arm rect {
+  --lightness: 45;
+  fill: hsl(var(--hue), calc(var(--saturation) * 1%), calc(var(--lightness) * 1%));
+}
+.care-bear__feet {
+  --lightness: 40;
+}
+.care-bear__feet path {
+  fill: hsl(var(--hue), calc(var(--saturation) * 1%), calc(var(--lightness) * 1%));
+}
+.care-bear__head circle {
+  fill: hsl(var(--hue), calc(var(--saturation) * 1%), calc(var(--lightness) * 1%));
+}
+.care-bear__belly circle:nth-of-type(1) {
+  fill: hsl(var(--hue), calc(var(--saturation) * 1%), calc(var(--lightness) * 1%));
+}
+.care-bear__belly circle:nth-of-type(2) {
+  --lightness: 90;
+  fill: hsl(var(--hue), calc(var(--saturation) * 1%), calc(var(--lightness) * 1%));
+}
+.care-bear__heart {
+  --saturation: 20;
+  --hue: 0;
+  fill: hsl(var(--hue), calc(var(--saturation) * 1%), calc(var(--lightness) * 1%));
+}
+.care-bear__muzzle {
+  --lightness: 90;
+}
+.care-bear__muzzle circle {
+  fill: hsl(var(--hue), calc(var(--saturation) * 1%), calc(var(--lightness) * 1%));
+}
