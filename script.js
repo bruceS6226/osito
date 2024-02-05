@@ -210,6 +210,11 @@ const blink = () => {
 };
 blink();
 
+const MOUTH_TL = new timeline({ paused: true })
+  .to($BEAR_MOUTH, { scaleY: 1, y: 0, duration: 0.2, ease: 'power1.inOut' })
+  .to($BEAR_MOUTH, { scaleY: 0, y: '+=2', duration: 0.2, ease: 'power1.inOut' })
+  .repeat(-1);
+
 const start = () => {
 
   if (STATE.CLOSING) return;
@@ -217,38 +222,62 @@ const start = () => {
   BREATHING_TL.pause();
   BLINKING_TL.pause();
   BLINKING_TL.seek(0);
-
+  $backgroundMusic.play();
   anime({
-    targets: $FELIZ,
     easing: 'easeInOutQuad',
-    duration: 1,
-    opacity: 1,
+    duration: 1500,
     complete: () => {
-      $backgroundMusic.play();
+      MOUTH_TL.play();
     }
   });
-
   anime({
     targets: $ROSA,
     easing: 'linear',
-    duration: 12000,
-    opacity: 1
+    duration: 8000,
+    complete: () => {
+      anime({
+        targets: $ROSA,
+        easing: 'linear',
+        duration: 12000,
+        opacity: 1
+      });
+    }
   });
-
   anime({
     targets: $BEAR,
     easing: 'easeInOutQuad',
-    duration: 7000,
-    marginTop: '500px',
+    duration: 5000,
     complete: () => {
-      try {
-        $RAIN.style.display = 'none';
-      } catch (error) {
-        set($BEAR, { '--hue': Math.floor(Math.random() * 360), '--saturation': 0, opacity: 1, marginTop: '500px' });
-        fireHearts();
-      }
+      anime({
+        targets: $FELIZ,
+        easing: 'easeInOutQuad',
+        duration: 6000,
+        opacity: 1
+      });
+      anime({
+        targets: $BEAR,
+        easing: 'easeInOutQuad',
+        duration: 10000,
+        marginTop: '500px',
+        complete: () => {
+          try {
+            $RAIN.style.display = 'none';
+          } catch (error) {
+            set($BEAR, { '--hue': Math.floor(Math.random() * 360), '--saturation': 0, opacity: 1, marginTop: '500px' });
+            fireHearts();
+          }
+        }
+      });
     }
   });
+  anime({
+    easing: 'easeInOutQuad',
+    duration: 28000,
+    complete: () => {
+      MOUTH_TL.pause();
+    }
+  });
+
 };
 
 
